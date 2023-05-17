@@ -10,10 +10,21 @@ export function Game() {
     { name: 'Roger', found: false },
   ]);
   const [listShown, setListShown] = useState(false);
-  const [coords, setCoords] = useState(undefined);
+  const [popupCoords, setPopupCoords] = useState();
+  const [coords, setCoords] = useState();
 
   function imageClick(e) {
-    const position = [e.pageX, e.pageY];
+    const popupX = e.pageX;
+    const popupY = e.pageY;
+    const bounds = e.target.getBoundingClientRect();
+    const width = bounds.width;
+    const height = bounds.height;
+    const x = e.clientX - bounds.left;
+    const y = e.clientY - bounds.top;
+    const xPercent = Math.round((x / width) * 100);
+    const yPercent = Math.round((y / height) * 100);
+    const position = [xPercent, yPercent];
+    setPopupCoords([popupX, popupY]);
     setCoords(position);
     console.log(position);
 
@@ -33,7 +44,7 @@ export function Game() {
         {listShown ? (
           <CharacterList
             characters={characters}
-            coords={coords}
+            popupCoords={popupCoords}
           />
         ) : null}
       </main>
@@ -41,14 +52,14 @@ export function Game() {
   );
 }
 
-function CharacterList({ characters, coords }) {
+function CharacterList({ characters, popupCoords }) {
   return (
     <ul
       id="popup-menu"
       style={{
         position: 'absolute',
-        left: coords[0],
-        top: coords[1],
+        left: popupCoords[0],
+        top: popupCoords[1],
       }}
     >
       <li>{characters[0].name}</li>

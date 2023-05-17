@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import manRay from '../images/manray.webp';
+import raiden from '../images/raiden.png';
+import roger from '../images/roger.png';
+
 import '../styles/header.css';
 
 function Header({ gameActive, setGameActive }) {
@@ -7,9 +11,34 @@ function Header({ gameActive, setGameActive }) {
 
   return (
     <header>
-      <h1>Find the Characters</h1>
+      {/* <h1>Find the Characters</h1> */}
       <p>0:00:00</p>
-      <p>0/3</p>
+      <div id="characters">
+        <div className="character">
+          <img
+            src={manRay}
+            alt=""
+            className="character-logo"
+          />
+          <p>Man Ray</p>
+        </div>
+        <div className="character">
+          <img
+            src={raiden}
+            alt=""
+            className="character-logo"
+          />
+          <p>Raiden</p>
+        </div>
+        <div className="character">
+          <img
+            src={roger}
+            alt=""
+            className="character-logo"
+          />
+          <p>Roger</p>
+        </div>
+      </div>
     </header>
   );
 }

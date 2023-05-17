@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+
+  background-color: pink;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}
+
+#game-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+}
+
+#popup-menu {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  list-style: none;
+  padding: 10px;
+}
+
+#popup-menu > li {
+  cursor: pointer;
+  padding: 5px;
+}

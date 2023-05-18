@@ -5,20 +5,21 @@ import roger from '../images/roger.png';
 
 import '../styles/header.css';
 
-function Header({ gameActive, setGameActive }) {
+function Header({ gameActive, setGameActive, characters }) {
   // const [gameActive, setGameActive] = useState(false);
   const [time, setTime] = useState(0);
 
   return (
     <header>
-      {/* <h1>Find the Characters</h1> */}
       <p>0:00:00</p>
       <div id="characters">
         <div className="character">
           <img
             src={manRay}
             alt=""
-            className="character-logo"
+            className={
+              characters[0].found ? 'found character-logo' : 'character-logo'
+            }
           />
           <p>Man Ray</p>
         </div>
@@ -26,7 +27,9 @@ function Header({ gameActive, setGameActive }) {
           <img
             src={raiden}
             alt=""
-            className="character-logo"
+            className={
+              characters[1].found ? 'found character-logo' : 'character-logo'
+            }
           />
           <p>Raiden</p>
         </div>
@@ -34,7 +37,9 @@ function Header({ gameActive, setGameActive }) {
           <img
             src={roger}
             alt=""
-            className="character-logo"
+            className={
+              characters[2].found ? 'found character-logo' : 'character-logo'
+            }
           />
           <p>Roger</p>
         </div>

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Header from './Header';
 import img from '../images/proj.jpeg';
 import '../styles/game.css';
+import { getCoords } from '../firebaseFunctions';
 
 export function Game() {
   const [characters, setCharacters] = useState([
-    { name: 'Man Ray', found: false },
-    { name: 'Raiden', found: false },
-    { name: 'Roger', found: false },
+    { name: 'Man Ray', id: 1, found: false },
+    { name: 'Raiden', id: 2, found: false },
+    { name: 'Roger', id: 3, found: false },
   ]);
   const [listShown, setListShown] = useState(false);
   const [popupCoords, setPopupCoords] = useState();
@@ -33,7 +34,7 @@ export function Game() {
 
   return (
     <>
-      <Header />
+      <Header characters={characters} />
       <main>
         <img
           src={img}
@@ -44,6 +45,8 @@ export function Game() {
         {listShown ? (
           <CharacterList
             characters={characters}
+            setCharacters={setCharacters}
+            coords={coords}
             popupCoords={popupCoords}
           />
         ) : null}
@@ -52,7 +55,27 @@ export function Game() {
   );
 }
 
-function CharacterList({ characters, popupCoords }) {
+function CharacterList({ characters, setCharacters, coords, popupCoords }) {
+  async function listClick(e) {
+    const char = e.target.dataset.char;
+    const charData = await getCoords(char);
+    console.log('gas');
+
+    validateCoords(coords, charData);
+  }
+
+  function validateCoords(coords, charData) {
+    let x = charData.possibleXCoords;
+    let y = charData.possibleYCoords;
+
+    if (x.includes(coords[0]) && y.includes(coords[1])) {
+      let updatedCharacters = [...characters];
+      const obj = updatedCharacters.find((x) => x.id === charData.id);
+      obj.found = true;
+      setCharacters(updatedCharacters);
+    }
+  }
+
   return (
     <ul
       id="popup-menu"
@@ -62,9 +85,30 @@ function CharacterList({ characters, popupCoords }) {
         top: popupCoords[1],
       }}
     >
-      <li>{characters[0].name}</li>
-      <li>{characters[1].name}</li>
-      <li>{characters[2].name}</li>
+      <li
+        data-char="manray"
+        // onClick={listClick}
+        onClick={characters[0].found ? undefined : listClick}
+        className={characters[0].found ? 'line-through' : ''}
+      >
+        {characters[0].name}
+      </li>
+      <li
+        data-char="raiden"
+        onClick={characters[1].found ? undefined : listClick}
+        className={characters[1].found ? 'line-through' : ''}
+      >
+        {characters[1].name}
+      </li>
+      <li
+        data-char="roger"
+        onClick={characters[2].found ? undefined : listClick}
+        className={characters[2].found ? 'line-through' : ''}
+
+        // conditional on click
+      >
+        {characters[2].name}
+      </li>
     </ul>
   );
 }

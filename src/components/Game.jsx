@@ -17,19 +17,21 @@ export function Game() {
   function imageClick(e) {
     const popupX = e.pageX;
     const popupY = e.pageY;
+
     const bounds = e.target.getBoundingClientRect();
     const width = bounds.width;
     const height = bounds.height;
+
     const x = e.clientX - bounds.left;
     const y = e.clientY - bounds.top;
+
     const xPercent = Math.round((x / width) * 100);
     const yPercent = Math.round((y / height) * 100);
     const position = [xPercent, yPercent];
-    setPopupCoords([popupX, popupY]);
-    setCoords(position);
-    console.log(position);
 
+    setPopupCoords([popupX, popupY]);
     setListShown(true);
+    return setCoords(position);
   }
 
   return (
@@ -56,15 +58,10 @@ export function Game() {
 }
 
 function CharacterList({ characters, setCharacters, coords, popupCoords }) {
-  async function listClick(e) {
+  async function validateCoords(e) {
     const char = e.target.dataset.char;
     const charData = await getCoords(char);
-    console.log('gas');
 
-    validateCoords(coords, charData);
-  }
-
-  function validateCoords(coords, charData) {
     let x = charData.possibleXCoords;
     let y = charData.possibleYCoords;
 
@@ -87,25 +84,25 @@ function CharacterList({ characters, setCharacters, coords, popupCoords }) {
     >
       <li
         data-char="manray"
-        // onClick={listClick}
-        onClick={characters[0].found ? undefined : listClick}
+        onClick={characters[0].found ? undefined : validateCoords}
         className={characters[0].found ? 'line-through' : ''}
+        aria-label="Man Ray"
       >
         {characters[0].name}
       </li>
       <li
         data-char="raiden"
-        onClick={characters[1].found ? undefined : listClick}
+        onClick={characters[1].found ? undefined : validateCoords}
         className={characters[1].found ? 'line-through' : ''}
+        aria-label="Raiden"
       >
         {characters[1].name}
       </li>
       <li
         data-char="roger"
-        onClick={characters[2].found ? undefined : listClick}
+        onClick={characters[2].found ? undefined : validateCoords}
         className={characters[2].found ? 'line-through' : ''}
-
-        // conditional on click
+        aria-label="Roger"
       >
         {characters[2].name}
       </li>

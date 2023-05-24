@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import img from '../images/proj.jpeg';
 import '../styles/game.css';
 import { getCoords } from '../firebaseFunctions';
+import { format, intervalToDuration } from 'date-fns';
 
 export function Game() {
   const [characters, setCharacters] = useState([
-    { name: 'Man Ray', id: 1, found: false },
-    { name: 'Raiden', id: 2, found: false },
-    { name: 'Roger', id: 3, found: false },
+    { name: 'Man Ray', id: 1, found: false, char: 'manray' },
+    { name: 'Raiden', id: 2, found: false, char: 'raiden' },
+    { name: 'Roger', id: 3, found: false, char: 'roger' },
   ]);
+
   const [listShown, setListShown] = useState(false);
   const [popupCoords, setPopupCoords] = useState();
   const [coords, setCoords] = useState();
+  const [gameWon, setGameWon] = useState(false);
+
+  const [startTime, setStartTime] = useState();
+  const [endTime, setEndTime] = useState();
+  const [totalTime, setTotalTime] = useState();
 
   function imageClick(e) {
     const popupX = e.pageX;
     const popupY = e.pageY;
 
     const bounds = e.target.getBoundingClientRect();
+
     const width = bounds.width;
     const height = bounds.height;
 
@@ -33,6 +41,26 @@ export function Game() {
     setListShown(true);
     return setCoords(position);
   }
+
+  useEffect(() => {
+    if (startTime === undefined) {
+      setStartTime(Date.now());
+    }
+  }, [startTime]);
+
+  useEffect(() => {
+    let allFound = characters.every((obj) => obj.found === true);
+    if (allFound) {
+      setGameWon(true);
+      setEndTime(Date.now());
+    }
+  }, [characters]);
+
+  useEffect(() => {
+    if (gameWon) {
+      setTotalTime((endTime - startTime) / 1000);
+    }
+  }, [endTime, gameWon, startTime]);
 
   return (
     <>
@@ -57,7 +85,12 @@ export function Game() {
   );
 }
 
-function CharacterList({ characters, setCharacters, coords, popupCoords }) {
+export function CharacterList({
+  characters,
+  setCharacters,
+  coords,
+  popupCoords,
+}) {
   async function validateCoords(e) {
     const char = e.target.dataset.char;
     const charData = await getCoords(char);
@@ -82,30 +115,19 @@ function CharacterList({ characters, setCharacters, coords, popupCoords }) {
         top: popupCoords[1],
       }}
     >
-      <li
-        data-char="manray"
-        onClick={characters[0].found ? undefined : validateCoords}
-        className={characters[0].found ? 'line-through' : ''}
-        aria-label="Man Ray"
-      >
-        {characters[0].name}
-      </li>
-      <li
-        data-char="raiden"
-        onClick={characters[1].found ? undefined : validateCoords}
-        className={characters[1].found ? 'line-through' : ''}
-        aria-label="Raiden"
-      >
-        {characters[1].name}
-      </li>
-      <li
-        data-char="roger"
-        onClick={characters[2].found ? undefined : validateCoords}
-        className={characters[2].found ? 'line-through' : ''}
-        aria-label="Roger"
-      >
-        {characters[2].name}
-      </li>
+      {characters.map((character) => {
+        return (
+          <li
+            onClick={character.found ? undefined : validateCoords}
+            className={character.found ? 'line-through' : ''}
+            data-char={character.char}
+            aria-label={character.name}
+            key={character.id}
+          >
+            {character.name}
+          </li>
+        );
+      })}
     </ul>
   );
 }

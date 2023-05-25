@@ -3,7 +3,7 @@ import Header from './Header';
 import img from '../images/proj.jpeg';
 import '../styles/game.css';
 import { getCoords } from '../firebaseFunctions';
-import { format, intervalToDuration } from 'date-fns';
+import { Dialog } from './Dialog';
 
 export function Game() {
   const [characters, setCharacters] = useState([
@@ -66,12 +66,21 @@ export function Game() {
     <>
       <Header characters={characters} />
       <main>
+        {/* {gameWon ? <FormDialog time={totalTime} /> : null} */}
+        {gameWon ? (
+          <Dialog
+            time={totalTime}
+            open={gameWon}
+          />
+        ) : null}
+
         <img
           src={img}
           alt="Various characters across video games, movies and TV shows crowded in a city street and on buildings."
           id="game-image"
           onClick={imageClick}
         />
+
         {listShown ? (
           <CharacterList
             characters={characters}

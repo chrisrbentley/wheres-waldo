@@ -6,12 +6,8 @@ import roger from '../images/roger.png';
 import '../styles/header.css';
 
 function Header({ gameActive, setGameActive, characters }) {
-  // const [gameActive, setGameActive] = useState(false);
-  const [time, setTime] = useState(0);
-
   return (
     <header>
-      <p>0:00:00</p>
       <div id="characters">
         <div className="character">
           <img

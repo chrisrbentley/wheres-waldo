@@ -9,9 +9,8 @@ export async function getCoords(character) {
 }
 
 export async function uploadTime(player, time) {
-  const docRef = await addDoc(collection(db, 'winners'), {
+  await addDoc(collection(db, 'winners'), {
     name: player,
     time: time,
   });
-  console.log(docRef);
 }

@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { uploadTime } from '../firebaseFunctions';
+import { useNavigate } from 'react-router-dom';
 import '../styles/dialog.css';
 
 export const Dialog = ({ time, open }) => {
   const [name, setName] = useState(null);
   const dialogRef = useRef(null);
+  const navigate = useNavigate();
 
   const saveData = (e) => {
     e.preventDefault();
     uploadTime(name, time);
+    navigate('/leaderboard');
   };
 
   useEffect(() => {
@@ -32,6 +35,7 @@ export const Dialog = ({ time, open }) => {
           placeholder="Name"
           onChange={(event) => setName(event.target.value)}
         />
+
         <button type="submit">Submit</button>
       </form>
     </dialog>

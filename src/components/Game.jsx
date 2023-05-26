@@ -57,7 +57,7 @@ export function Game() {
   }, [characters]);
 
   useEffect(() => {
-    if (gameWon) {
+    if (gameWon && endTime) {
       setTotalTime((endTime - startTime) / 1000);
     }
   }, [endTime, gameWon, startTime]);
@@ -66,7 +66,6 @@ export function Game() {
     <>
       <Header characters={characters} />
       <main>
-        {/* {gameWon ? <FormDialog time={totalTime} /> : null} */}
         {gameWon ? (
           <Dialog
             time={totalTime}

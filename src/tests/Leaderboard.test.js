@@ -30,7 +30,7 @@ describe('leaderboard component', () => {
     expect(screen.getByText('42.531')).toBeInTheDocument();
   });
 
-  it('etc', async () => {
+  it('renders message if there is no winner data', async () => {
     getWinners.mockResolvedValue([]);
 
     render(<Leaderboard />);

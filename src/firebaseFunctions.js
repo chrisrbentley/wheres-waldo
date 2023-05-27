@@ -1,5 +1,14 @@
 import { app, db } from './firebase';
-import { doc, getDoc, collection, addDoc } from 'firebase/firestore';
+import {
+  doc,
+  get,
+  getDoc,
+  getDocs,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 
 export async function getCoords(character) {
   const docRef = doc(db, 'characters', character);
@@ -13,4 +22,22 @@ export async function uploadTime(player, time) {
     name: player,
     time: time,
   });
+}
+
+export async function getWinners() {
+  try {
+    const winnersRef = collection(db, 'winners');
+    const orderedQuery = query(winnersRef, orderBy('time'));
+    const orderedDocs = await getDocs(orderedQuery);
+
+    const orderedWinners = [];
+    orderedDocs.forEach((doc) => {
+      const winner = doc.data();
+      orderedWinners.push(winner);
+    });
+    console.log(orderedWinners);
+    return orderedWinners;
+  } catch (error) {
+    return null;
+  }
 }

@@ -23,11 +23,20 @@ main {
   list-style: none;
   padding: 10px;
   border-radius: 5px;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
 }
 
 #popupMenu > li {
   cursor: pointer;
   padding: 5px;
+  text-align: center;
 }
 
 .lineThrough {

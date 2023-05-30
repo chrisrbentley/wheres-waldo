@@ -14,6 +14,7 @@ body {
 
 #leaderboardContainer {
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   margin-top: 1.87rem;
@@ -30,6 +31,7 @@ body {
 table {
   width: 60vw;
   border: 1px solid grey;
+  margin-bottom: 1.87rem;
 }
 
 thead,
@@ -45,4 +47,14 @@ tbody {
 td,
 th {
   padding: 1rem;
+}
+
+.navLinks {
+  cursor: pointer;
+  padding: 15px;
+  color: #fff;
+  background-color: #222;
+  border: 1px solid grey;
+  border: none;
+  text-decoration: none;
 }

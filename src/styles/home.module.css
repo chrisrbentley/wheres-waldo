@@ -1,0 +1,38 @@
+#homeHeader {
+  padding: 15px;
+}
+
+#homeContainer {
+  display: grid;
+  place-items: center;
+  height: 94vh;
+}
+
+#mainSec {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#buttonsGroup {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+#buttonsGroup > button {
+  color: #fff;
+  background-color: #222;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}

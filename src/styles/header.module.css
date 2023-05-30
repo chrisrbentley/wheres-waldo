@@ -36,3 +36,8 @@ p {
 .found {
   filter: brightness(50%);
 }
+
+#link {
+  color: white;
+  text-decoration: none;
+}

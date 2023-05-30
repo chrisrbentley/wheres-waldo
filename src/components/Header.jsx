@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import manRay from '../images/manray.webp';
 import raiden from '../images/raiden.png';
 import roger from '../images/roger.png';
 import headerCSS from '../styles/header.module.css';
+import { Link } from 'react-router-dom';
 
 function Header({ characters }) {
   return (
     <header>
+      <nav>
+        <Link
+          to="/"
+          id={headerCSS.link}
+        >
+          Home
+        </Link>
+      </nav>
       <div id={headerCSS.characters}>
         <div className={headerCSS.character}>
           <img

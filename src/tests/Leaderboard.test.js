@@ -3,6 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import Leaderboard from '../components/Leaderboard';
 import { getWinners } from '../firebaseFunctions';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('../firebaseFunctions', () => ({
   getWinners: jest.fn(),
@@ -21,7 +22,11 @@ describe('leaderboard component', () => {
       { time: 42.531, name: 'john' },
     ]);
 
-    render(<Leaderboard />);
+    render(
+      <BrowserRouter>
+        <Leaderboard />
+      </BrowserRouter>,
+    );
     await waitFor(() => {
       expect(screen.getByText('chris')).toBeInTheDocument();
     });
@@ -33,7 +38,11 @@ describe('leaderboard component', () => {
   it('renders message if there is no winner data', async () => {
     getWinners.mockResolvedValue([]);
 
-    render(<Leaderboard />);
+    render(
+      <BrowserRouter>
+        <Leaderboard />
+      </BrowserRouter>,
+    );
 
     await waitFor(() => {
       expect(
@@ -48,8 +57,11 @@ describe('leaderboard component', () => {
       { time: 42.531, name: 'john' },
     ]);
 
-    render(<Leaderboard />);
-
+    render(
+      <BrowserRouter>
+        <Leaderboard />
+      </BrowserRouter>,
+    );
     await waitFor(() => {
       expect(screen.getByRole('heading')).toBeInTheDocument();
     });

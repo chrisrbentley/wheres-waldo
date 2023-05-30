@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getWinners } from '../firebaseFunctions';
+import { Link } from 'react-router-dom';
 import LeaderboardCSS from '../styles/leaderboard.module.css';
 
 const Leaderboard = () => {
@@ -22,6 +23,20 @@ const Leaderboard = () => {
         <>
           <header id={LeaderboardCSS.leaderboardHeader}>
             <h1>Leaderboard</h1>
+            <nav>
+              <Link
+                to="/"
+                className={LeaderboardCSS.navLinks}
+              >
+                Home
+              </Link>
+              <Link
+                className={LeaderboardCSS.navLinks}
+                to="/game"
+              >
+                Play
+              </Link>
+            </nav>
           </header>
           <main id={LeaderboardCSS.leaderboardContainer}>
             {winners.length < 1 ? (

@@ -39,6 +39,8 @@ export const Dialog = ({ time, open }) => {
           name="name"
           id="name"
           placeholder="Name"
+          minLength={2}
+          required
           onChange={(event) => setName(event.target.value)}
         />
 

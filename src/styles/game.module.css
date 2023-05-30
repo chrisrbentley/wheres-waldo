@@ -1,37 +1,35 @@
 body {
   margin: 0;
-
-  background-color: pink;
 }
 
 main {
   height: 100%;
   width: 100%;
-  background-color: red;
 }
 
-#game-image {
+#gameImage {
   width: auto;
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
 }
 
-#popup-menu {
+#popupMenu {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #222;
   list-style: none;
   padding: 10px;
+  border-radius: 5px;
 }
 
-#popup-menu > li {
+#popupMenu > li {
   cursor: pointer;
   padding: 5px;
 }
 
-.line-through {
+.lineThrough {
   text-decoration: line-through;
 }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import img from '../images/proj.jpeg';
-import '../styles/game.css';
 import { getCoords } from '../firebaseFunctions';
 import { Dialog } from './Dialog';
+import GameCSS from '../styles/game.module.css';
 
 export function Game() {
   const [characters, setCharacters] = useState([
@@ -76,7 +76,7 @@ export function Game() {
         <img
           src={img}
           alt="Various characters across video games, movies and TV shows crowded in a city street and on buildings."
-          id="game-image"
+          id={GameCSS.gameImage}
           onClick={imageClick}
         />
 
@@ -102,6 +102,7 @@ export function CharacterList({
   async function validateCoords(e) {
     const char = e.target.dataset.char;
     const charData = await getCoords(char);
+    console.log(charData);
 
     let x = charData.possibleXCoords;
     let y = charData.possibleYCoords;
@@ -116,7 +117,7 @@ export function CharacterList({
 
   return (
     <ul
-      id="popup-menu"
+      id={GameCSS.popupMenu}
       style={{
         position: 'absolute',
         left: popupCoords[0],
@@ -127,7 +128,7 @@ export function CharacterList({
         return (
           <li
             onClick={character.found ? undefined : validateCoords}
-            className={character.found ? 'line-through' : ''}
+            className={character.found ? GameCSS.lineThrough : ''}
             data-char={character.char}
             aria-label={character.name}
             key={character.id}

@@ -2,39 +2,44 @@ import React, { useState } from 'react';
 import manRay from '../images/manray.webp';
 import raiden from '../images/raiden.png';
 import roger from '../images/roger.png';
+import headerCSS from '../styles/header.module.css';
 
-import '../styles/header.css';
-
-function Header({ gameActive, setGameActive, characters }) {
+function Header({ characters }) {
   return (
     <header>
-      <div id="characters">
-        <div className="character">
+      <div id={headerCSS.characters}>
+        <div className={headerCSS.character}>
           <img
             src={manRay}
             alt=""
             className={
-              characters[0].found ? 'found character-logo' : 'character-logo'
+              characters[0].found
+                ? headerCSS.found + ' ' + headerCSS.characterLogo
+                : headerCSS.characterLogo
             }
           />
           <p>Man Ray</p>
         </div>
-        <div className="character">
+        <div className={headerCSS.character}>
           <img
             src={raiden}
             alt=""
             className={
-              characters[1].found ? 'found character-logo' : 'character-logo'
+              characters[1].found
+                ? headerCSS.found + ' ' + headerCSS.characterLogo
+                : headerCSS.characterLogo
             }
           />
           <p>Raiden</p>
         </div>
-        <div className="character">
+        <div className={headerCSS.character}>
           <img
             src={roger}
             alt=""
             className={
-              characters[2].found ? 'found character-logo' : 'character-logo'
+              characters[2].found
+                ? headerCSS.found + ' ' + headerCSS.characterLogo
+                : headerCSS.characterLogo
             }
           />
           <p>Roger</p>

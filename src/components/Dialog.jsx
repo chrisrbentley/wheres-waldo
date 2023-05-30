@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { uploadTime } from '../firebaseFunctions';
 import { useNavigate } from 'react-router-dom';
-import '../styles/dialog.css';
+import DialogCSS from '../styles/dialog.module.css';
 
 export const Dialog = ({ time, open }) => {
   const [name, setName] = useState(null);
@@ -22,12 +22,18 @@ export const Dialog = ({ time, open }) => {
   }, [open]);
 
   return (
-    <dialog ref={dialogRef}>
+    <dialog
+      id={DialogCSS.addName}
+      ref={dialogRef}
+    >
       <p>
         You finished in {time} seconds. Enter your name to be added to the
         leaderboard.
       </p>
-      <form onSubmit={saveData}>
+      <form
+        id={DialogCSS.form}
+        onSubmit={saveData}
+      >
         <input
           type="text"
           name="name"

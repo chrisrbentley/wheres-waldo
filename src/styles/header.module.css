@@ -5,7 +5,7 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
-  background-color: red;
+  background-color: #222;
 }
 
 h1 {
@@ -28,7 +28,7 @@ p {
   flex-flow: column wrap;
 }
 
-.character-logo {
+.characterLogo {
   height: auto;
   max-height: 55px;
 }

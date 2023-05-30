@@ -1,10 +1,13 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Game, CharacterList } from '../components/Game';
+import { getCoords } from '../firebaseFunctions';
 
-jest.mock('../firebaseFunctions');
+jest.mock('../firebaseFunctions', () => ({
+  getCoords: jest.fn(),
+}));
 
 describe('Game component', () => {
   it('Renders dropdown on image click', async () => {
@@ -41,6 +44,6 @@ describe('Game component', () => {
     );
 
     const manray = screen.getByRole('listitem', { name: 'Man Ray' });
-    expect(manray).toHaveClass('line-through');
+    expect(manray).toHaveClass('lineThrough');
   });
 });

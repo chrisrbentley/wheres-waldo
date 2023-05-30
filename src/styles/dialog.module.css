@@ -1,0 +1,22 @@
+dialog::backdrop {
+  filter: blur(5px);
+}
+
+#addName {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  gap: 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+#form {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#form > input,
+button {
+  padding: 5px;
+}

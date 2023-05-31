@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import Home from './components/Home';
 import { Game } from './components/Game';
 import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -21,7 +21,7 @@ function App() {
           element={<Leaderboard />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

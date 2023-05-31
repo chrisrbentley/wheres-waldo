@@ -50,9 +50,12 @@ const Leaderboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {winners.map((winner) => {
+                  {winners.map((winner, index) => {
                     return (
-                      <tr className="leaderboard-row">
+                      <tr
+                        key={index}
+                        className="leaderboard-row"
+                      >
                         <td>{winner.name}</td>
                         <td>{winner.time}</td>
                       </tr>

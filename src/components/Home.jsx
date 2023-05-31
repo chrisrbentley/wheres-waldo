@@ -5,10 +5,14 @@ import HomeCSS from '../styles/home.module.css';
 const Home = () => {
   return (
     <>
-      <header id={HomeCSS.homeHeader}>Where Are We?</header>
+      <header id={HomeCSS.homeHeader}>
+        <h1>Where Are We?</h1>
+      </header>
       <main id={HomeCSS.homeContainer}>
         <section id={HomeCSS.mainSec}>
-          <p>Find all of the characters in the image to win.</p>
+          <p aria-label="Instructions">
+            Find all of the characters in the image to win.
+          </p>
           <section id={HomeCSS.buttonsGroup}>
             <button>
               <Link
